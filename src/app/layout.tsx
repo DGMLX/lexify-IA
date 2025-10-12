@@ -43,7 +43,7 @@ export default function RootLayout({
               <Navbar/>
             </ThemeProvider>
             {children}
-            <Footer/>
+            {/* <Footer/> */}
         </body>
         
      
