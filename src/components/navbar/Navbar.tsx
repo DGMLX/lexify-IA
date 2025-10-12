@@ -33,10 +33,11 @@ import { IoKeyOutline } from "react-icons/io5";
 import Image from 'next/image';
 import { ModeToggle } from './ModeButton';
 import Link from 'next/link';
-import { AlertDialogFooter } from '../ui/alert-dialog'
+
 import { Input } from '../ui/input'
 import { Label } from '../ui/label'
 
+import { RiGitRepositoryPrivateLine } from "react-icons/ri";
 
 const Navbar = () => {
   return (
@@ -60,7 +61,7 @@ const Navbar = () => {
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent sideOffset={10}>
-                        <DropdownMenuLabel>Acceso</DropdownMenuLabel>
+                        <DropdownMenuLabel className='flex items-center'><RiGitRepositoryPrivateLine className='text-xl mr-2'/>Acceso</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem className='cursor-pointer' onSelect={(e) => e.preventDefault()}>
                             <Dialog>
