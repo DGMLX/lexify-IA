@@ -18,6 +18,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Lexify",
   description: "Tu traductor inteligente",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
@@ -26,21 +29,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="light"
-        enableSystem
-        disableTransitionOnChange
-      >
-        <Navbar/>
+    <html lang="en" suppressHydrationWarning>
+     
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
           >
-          {children}
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="light"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <Navbar/>
+            </ThemeProvider>
+            {children}
+            <Footer/>
         </body>
-        <Footer/>
-      </ThemeProvider>
+        
+     
     </html>
   );
 }

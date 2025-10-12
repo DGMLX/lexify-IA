@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 
 import { Button } from '../ui/button'
@@ -15,6 +17,7 @@ import { MdTranslate } from "react-icons/md";
 import { PiMagicWandLight } from "react-icons/pi";
 import Image from 'next/image';
 import { ModeToggle } from './ModeButton';
+import Link from 'next/link';
 
 
 const Navbar = () => {
@@ -22,13 +25,14 @@ const Navbar = () => {
     <>
         <header className='mt-3 flex justify-between mx-10 items-center'>
             <div className='flex items-center'>
-
-                <Image src="/logo.png" alt='logotipo' height={70} width={70}/>
+                <Link href="/">
+                    <Image src="/logo.png" alt='logotipo' height={70} width={70}/>
+                </Link>
                 <p className='font-thin text-2xl'>Lexify</p>
             </div>
             <div className='gap-2 flex'>
-                <Button className='cursor-pointer flex items-center' variant="outline"><MdTranslate className='text-xl'/>Traductor</Button>
-                <Button className='cursor-pointer flex items-center bg-gradient-lexify hover:bg-gradient-lexify-hover transition-all'><PiMagicWandLight className='text-xl'/>Traductor PRO</Button>
+                <Button className='cursor-pointer flex items-center' variant="outline"><MdTranslate className='text-xl'/><Link href="/traductor">Traductor</Link></Button>
+                <Button className='cursor-pointer flex items-center bg-gradient-lexify hover:bg-gradient-lexify-hover transition-all'><PiMagicWandLight className='text-xl'/>Lexify PRO</Button>
                 <ModeToggle/>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
