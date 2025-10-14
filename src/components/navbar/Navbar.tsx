@@ -42,7 +42,7 @@ import { RiGitRepositoryPrivateLine } from "react-icons/ri";
 const Navbar = () => {
   return (
     <>
-        <header className='mt-3 flex justify-between mx-1 sm:mx-10 items-center text-green-500 sm:text-blue-600'>
+        <header className='mt-3 flex justify-between mx-1 sm:mx-10 items-center '>
             <div className='flex items-center'>
                 <Link href="/">
                     <Image src="/logo.png" alt='logotipo' height={70} width={70}/>
