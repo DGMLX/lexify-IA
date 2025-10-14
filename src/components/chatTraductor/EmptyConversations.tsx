@@ -56,9 +56,9 @@ const EmptyConversations=()=> {
             </DialogHeader>
             <div className="flex justify-around items-center">
                 <div>
-                    <p className=" mb-2">Idioma principal</p>
+                    <p className="text-sm sm:text-md mb-2">Idioma principal</p>
                     <Select>
-                        <SelectTrigger className="w-[180px]">
+                        <SelectTrigger className="w-[100px] md:w-[180px]">
                             <SelectValue placeholder="Idioma" />
                         </SelectTrigger>
                         <SelectLanguages/>
@@ -67,9 +67,9 @@ const EmptyConversations=()=> {
                 </div>
                 <IoArrowForwardCircleOutline className="text-2xl"/>
                 <div>
-                    <p className=" mb-2">Idioma a traducir</p>
+                    <p className="text-sm sm:text-md mb-2">Idioma a traducir</p>
                     <Select>
-                        <SelectTrigger className="w-[180px]">
+                        <SelectTrigger className="w-[100px] md:w-[180px]">
                             <SelectValue placeholder="Idioma" />
                         </SelectTrigger>
                         <SelectLanguages/>
