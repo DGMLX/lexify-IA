@@ -42,16 +42,16 @@ import { RiGitRepositoryPrivateLine } from "react-icons/ri";
 const Navbar = () => {
   return (
     <>
-        <header className='mt-3 flex justify-between mx-10 items-center'>
+        <header className='mt-3 flex justify-between mx-1 sm:mx-10 items-center text-green-500 sm:text-blue-600'>
             <div className='flex items-center'>
                 <Link href="/">
                     <Image src="/logo.png" alt='logotipo' height={70} width={70}/>
                 </Link>
-                <p className='font-thin text-2xl'>Lexify</p>
+                <p className='font-thin text-2xl hidden sm:block'>Lexify</p>
             </div>
             <div className='gap-2 flex'>
                 <Button className='cursor-pointer flex items-center' variant="outline"><MdTranslate className='text-xl'/><Link href="/traductor">Traductor</Link></Button>
-                <Button className='cursor-pointer flex items-center bg-gradient-lexify hover:bg-gradient-lexify-hover transition-all'><PiMagicWandLight className='text-xl'/>Lexify PRO</Button>
+                <Button className='cursor-pointer flex items-center bg-gradient-lexify hover:bg-gradient-lexify-hover transition-all'><PiMagicWandLight className='text-xl'/><span className='hidden sm:block'>Lexify</span> PRO</Button>
                 <ModeToggle/>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
