@@ -1,11 +1,11 @@
 'use server'
 
-type InfoUser = {
+type InfoUserLogin = {
     email:string
     password:string
 }
 
-const loginAction = async(data:InfoUser) =>{
+const loginAction = async(data:InfoUserLogin) =>{
     try {
         console.log("----------")
         console.log(data)

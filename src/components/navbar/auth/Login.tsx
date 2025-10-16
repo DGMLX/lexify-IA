@@ -52,7 +52,7 @@ const Login = () => {
                     
                 
                     <AlertDescription>
-                      El email es un campo obligatorio para iniciar sesión.
+                      El email es un campo obligatorio.
                     </AlertDescription>
                   </Alert>
               }
@@ -66,7 +66,7 @@ const Login = () => {
                     
                 
                     <AlertDescription>
-                      El contraseña es un campo obligatorio para iniciar sesión.
+                      El contraseña es un campo obligatorio.
                     </AlertDescription>
                   </Alert>
               }

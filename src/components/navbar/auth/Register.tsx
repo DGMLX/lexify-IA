@@ -1,6 +1,6 @@
 'use client'
 
-import React, { FormEvent, useState } from 'react'
+import React, { useState } from 'react'
 
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
@@ -12,6 +12,9 @@ import { IoKeyOutline } from 'react-icons/io5'
 import { CiUser } from 'react-icons/ci'
 import { SubmitHandler, useForm} from "react-hook-form"
 import { Alert, AlertDescription } from '@/components/ui/alert'
+import registerAction from '@/actions/auth/register-action'
+import { Spinner } from "@/components/ui/spinner"
+import { sleep } from '@/utils/sleep'
 
 type FormInputs = {
     name: string;
@@ -22,13 +25,16 @@ type FormInputs = {
 
 const Register = () => {
 
-    const [errorMessage,setErrorMessage] = useState('')
-    const {register,handleSubmit,formState:{errors}} = useForm<FormInputs>()
+    const [loading,setLoading] = useState(false)
+    const {register,handleSubmit,formState:{errors},reset} = useForm<FormInputs>()
 
     const onSubmit : SubmitHandler<FormInputs> = async(data) =>{
-        setErrorMessage('')
-        console.log(data)
-       
+        setLoading(true)
+        await sleep(1000); 
+        const resp = await registerAction(data)
+        console.log(resp)
+        reset()
+        setLoading(false)
     }
 
   return (
@@ -80,6 +86,7 @@ const Register = () => {
                         </Alert>
                     }
                     </div>
+                    
                         <div className="grid gap-3">
                     <Label htmlFor="rePassword"><IoKeyOutline className='text-lg'/>Reingresa tu Contraseña</Label>
                     <Input id="rePassword"  defaultValue="" type='password'  {...register('rePassword',{required:true})} />
@@ -92,11 +99,19 @@ const Register = () => {
                     }
                     </div>
                 </div>
+                
+                {
+                    loading && 
+                    <div className='flex justify-center mt-5'>
+                        <Spinner/>
+                    </div>
+                }
                 <DialogFooter className='mt-5'>
                     <DialogClose asChild>
+                        
                     <Button variant="outline" className='cursor-pointer'>Cancel</Button>
                     </DialogClose>
-                    <Button type="submit" className='cursor-pointer'>Ingresar</Button>
+                    <Button type="submit" className='cursor-pointer'>Registrarse</Button>
                 </DialogFooter>
                   </form>
                 </DialogContent>
