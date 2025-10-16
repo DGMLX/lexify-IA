@@ -9,6 +9,9 @@ import React, { useState } from 'react'
 import { AiOutlineMail } from 'react-icons/ai'
 import { IoKeyOutline } from 'react-icons/io5'
 import { SubmitHandler, useForm} from "react-hook-form"
+import loginAction from '@/actions/auth/login.action'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { Terminal } from 'lucide-react'
 
 type FormInputs = {
     email: string;
@@ -22,8 +25,7 @@ const Login = () => {
 
     const onSubmit : SubmitHandler<FormInputs> = async(data) =>{
         setErrorMessage('')
-        console.log(data)
-        
+        loginAction(data)
     }
 
   return (
@@ -44,11 +46,30 @@ const Login = () => {
             <div className="grid gap-3">
               <Label htmlFor="email"><AiOutlineMail className='text-lg' />Correo electrónico</Label>
               <Input id="email" type='email' {...register('email', { required: true })} />
+              {
+                errors.email && 
+                  <Alert variant="destructive">
+                    
+                
+                    <AlertDescription>
+                      El email es un campo obligatorio para iniciar sesión.
+                    </AlertDescription>
+                  </Alert>
+              }
             </div>
 
             <div className="grid gap-3">
               <Label htmlFor="password"><IoKeyOutline className='text-lg' />Contraseña</Label>
               <Input id="password" type='password' {...register('password', { required: true })} />
+              {   errors.password && 
+                  <Alert variant="destructive">
+                    
+                
+                    <AlertDescription>
+                      El contraseña es un campo obligatorio para iniciar sesión.
+                    </AlertDescription>
+                  </Alert>
+              }
             </div>
 
             <DialogFooter>

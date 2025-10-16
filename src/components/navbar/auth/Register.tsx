@@ -11,6 +11,7 @@ import { AiOutlineMail } from 'react-icons/ai'
 import { IoKeyOutline } from 'react-icons/io5'
 import { CiUser } from 'react-icons/ci'
 import { SubmitHandler, useForm} from "react-hook-form"
+import { Alert, AlertDescription } from '@/components/ui/alert'
 
 type FormInputs = {
     name: string;
@@ -49,18 +50,46 @@ const Register = () => {
                         <div className="grid gap-3">
                     <Label htmlFor="name" ><CiUser className='text-lg'/>Nombre</Label>
                     <Input id="name" type='text' defaultValue="" {...register('name',{required:true})} />
+                     {   errors.name && 
+                        <Alert variant="destructive">                       
+                            <AlertDescription>
+                            El nombre es un campo obligatorio.
+                            </AlertDescription>
+                        </Alert>
+                    }
                     </div>
                     <div className="grid gap-3">
                     <Label htmlFor="email" ><AiOutlineMail className='text-lg'/>Correo electrónico</Label>
                     <Input id="email" type='email' defaultValue=""  {...register('email',{required:true})} />
+                     {   errors.email && 
+                        <Alert variant="destructive">                       
+                            <AlertDescription>
+                            El email es un campo obligatorio.
+                            </AlertDescription>
+                        </Alert>
+                    }
                     </div>
                     <div className="grid gap-3">
                     <Label htmlFor="password"><IoKeyOutline className='text-lg'/>Contraseña</Label>
                     <Input id="password" defaultValue="" type='password'  {...register('password',{required:true})} />
+                     {   errors.password && 
+                        <Alert variant="destructive">                       
+                            <AlertDescription>
+                            La contraseña es un campo obligatorio.
+                            </AlertDescription>
+                        </Alert>
+                    }
                     </div>
                         <div className="grid gap-3">
                     <Label htmlFor="rePassword"><IoKeyOutline className='text-lg'/>Reingresa tu Contraseña</Label>
                     <Input id="rePassword"  defaultValue="" type='password'  {...register('rePassword',{required:true})} />
+                     {   errors.rePassword && 
+                        <Alert variant="destructive">                       
+                            <AlertDescription>
+                            El validación de contraseña es un campo obligatorio.
+                            </AlertDescription>
+                        </Alert>
+                    }
                     </div>
                 </div>
                 <DialogFooter className='mt-5'>
