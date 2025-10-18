@@ -51,7 +51,9 @@
             setLoading(false)
           }else{
             setLoginSuccess(true)
-            toast.success("Inicio de sesión exitoso")
+            toast.success("Inicio de sesión exitoso",{
+                position:"top-center"
+            })
             setError(false)
             setLoading(false)
             router.push("/traductor")

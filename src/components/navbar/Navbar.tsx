@@ -21,7 +21,6 @@ import { MdTranslate } from "react-icons/md";
 import { PiMagicWandLight } from "react-icons/pi";
 import { IoIosLogOut } from "react-icons/io";
 
-
 import Image from 'next/image';
 import { ModeToggle } from './ModeButton';
 import Link from 'next/link';
@@ -33,12 +32,14 @@ import Register from './auth/Register'
 
 import { useSession } from 'next-auth/react';
 import {signOut} from "next-auth/react"
+import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
 
 
 const Navbar = () => {
 
     const session = useSession()
-
+    const router = useRouter()
 
   return (
     <>
@@ -50,13 +51,21 @@ const Navbar = () => {
                 <p className='font-thin text-2xl hidden sm:block'>Lexify</p>
             </div>
             <div className='gap-2 flex'>
-                <Button className='cursor-pointer flex items-center' variant="outline"><MdTranslate className='text-xl'/><Link href="/traductor">Traductor</Link></Button>
+                <Button className='cursor-pointer flex items-center' variant="outline"><MdTranslate className='text-xl'/><Link href="/traductor">Demo</Link></Button>
                 <Button className='cursor-pointer flex items-center bg-gradient-lexify hover:bg-gradient-lexify-hover transition-all'><PiMagicWandLight className='text-xl'/><span className='hidden sm:block'>Lexify</span> PRO</Button>
                 <ModeToggle/>
                 {
                     session.data?.user?.email ?
                         <Tooltip>
-                            <TooltipTrigger asChild><Button onClick={()=>signOut()} className='cursor-pointer' variant="outline"><IoIosLogOut className=''/></Button></TooltipTrigger>
+                            <TooltipTrigger asChild><Button onClick={async ()=>{
+                               
+                                toast.success("Cierre de sesión exitoso.",{
+                                    position:"top-center"
+                                })
+                                signOut({redirect:false})
+                                router.push("/")
+                                
+                            }} className='cursor-pointer' variant="outline"><IoIosLogOut className=''/></Button></TooltipTrigger>
                             <TooltipContent>
                                 Cerrar sesión
                             </TooltipContent>
