@@ -51,6 +51,7 @@
             setLoading(false)
           }else{
             setLoginSuccess(true)
+            toast.success("Inicio de sesión exitoso")
             setError(false)
             setLoading(false)
             router.push("/traductor")
@@ -64,9 +65,7 @@
     return (
 
       
-        loginSuccess ? (
-          toast.success("Inicio de sesión exitoso")
-        ): (
+        !loginSuccess && 
       <DropdownMenuItem className='cursor-pointer' onSelect={(e) => {
           e.preventDefault()
           setError(false)
@@ -147,7 +146,7 @@
           </DropdownMenuItem>
         )   
       
-    )
+    
   }
 
   export default Login

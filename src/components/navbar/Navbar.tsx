@@ -55,7 +55,7 @@ const Navbar = () => {
                 {
                     session.data?.user?.email ?
                         <Tooltip>
-                            <TooltipTrigger><Button onClick={()=>console.log("cerrando sesion...")} className='cursor-pointer' variant="outline"><IoIosLogOut className=''/></Button></TooltipTrigger>
+                            <TooltipTrigger asChild><Button onClick={()=>console.log("cerrando sesion...")} className='cursor-pointer' variant="outline"><IoIosLogOut className=''/></Button></TooltipTrigger>
                             <TooltipContent>
                                 Cerrar sesión
                             </TooltipContent>

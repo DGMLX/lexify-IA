@@ -30,18 +30,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-           
-                <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-                >
-                    <SidebarProvider>
-                        <SidebarComponent/>
-                        <SidebarTrigger/>
-                        {children}
-                    </SidebarProvider>
-                </body>
-            
-    </html>
+  
+        <SidebarProvider>
+            <SidebarComponent/>
+            <SidebarTrigger/>
+            {children}
+        </SidebarProvider>
+
   );
 }
