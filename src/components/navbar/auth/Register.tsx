@@ -7,11 +7,16 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+
 import { AiOutlineMail } from 'react-icons/ai'
 import { IoKeyOutline } from 'react-icons/io5'
+import { BiErrorAlt } from "react-icons/bi";
+import { FiUserCheck } from "react-icons/fi";
+
+
 import { CiUser } from 'react-icons/ci'
 import { SubmitHandler, useForm} from "react-hook-form"
-import { Alert, AlertDescription } from '@/components/ui/alert'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import registerAction from '@/actions/auth/register-action'
 import { Spinner } from "@/components/ui/spinner"
 import { sleep } from '@/utils/sleep'
@@ -24,21 +29,34 @@ type FormInputs = {
 }
 
 const Register = () => {
-
+    const [error,setError] = useState(false)
+    const [alertMessage,setAlertMessage] =useState("")
     const [loading,setLoading] = useState(false)
     const {register,handleSubmit,formState:{errors},reset} = useForm<FormInputs>()
 
     const onSubmit : SubmitHandler<FormInputs> = async(data) =>{
+        setAlertMessage("")
         setLoading(true)
         await sleep(1000); 
         const resp = await registerAction(data)
-        console.log(resp)
+        if(!resp.ok){
+            setLoading(false)
+            setError(true)
+            return setAlertMessage(resp.message)
+        }
         reset()
         setLoading(false)
+        setError(false)
+        setAlertMessage(resp.message)
     }
 
   return (
-    <DropdownMenuItem className='cursor-pointer' onSelect={(e) => e.preventDefault()}>
+    <DropdownMenuItem className='cursor-pointer' onSelect={(e) => {
+            e.preventDefault()
+            setAlertMessage("")
+            setError(false)
+     
+        }}>
         <Dialog>
            
                 <DialogTrigger className='cursor-pointer'>
@@ -106,10 +124,33 @@ const Register = () => {
                         <Spinner/>
                     </div>
                 }
+                {
+                    (alertMessage !== "" && error) &&
+                    <Alert className='mt-3' variant="destructive">       
+                        <AlertTitle className='flex items-center'><BiErrorAlt className='text-lg text-red-500 mr-1'/>Error</AlertTitle>                
+                        <AlertDescription>
+                        {alertMessage}
+                        </AlertDescription>
+                    </Alert>
+                }
+                
+                {
+                    (alertMessage !== "" && !error) &&
+                    <Alert className='mt-3' variant="default">       
+                                        
+                        <AlertDescription className='flex items-center text-green-600'>
+                            <FiUserCheck className='text-lg mr-1'/>   
+                            {alertMessage}
+                        </AlertDescription>
+                    </Alert>
+                }
                 <DialogFooter className='mt-5'>
                     <DialogClose asChild>
                         
-                    <Button variant="outline" className='cursor-pointer'>Cancel</Button>
+                    <Button variant="outline" className='cursor-pointer' onClick={()=>{
+                        setError(false) 
+                        setAlertMessage("")
+                    }}>Cancelar</Button>
                     </DialogClose>
                     <Button type="submit" className='cursor-pointer'>Registrarse</Button>
                 </DialogFooter>
