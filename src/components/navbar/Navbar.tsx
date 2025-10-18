@@ -51,7 +51,7 @@ const Navbar = () => {
                 <p className='font-thin text-2xl hidden sm:block'>Lexify</p>
             </div>
             <div className='gap-2 flex'>
-                <Button className='cursor-pointer flex items-center' variant="outline"><MdTranslate className='text-xl'/><Link href="/traductor">Demo</Link></Button>
+                <Button className='cursor-pointer flex items-center' variant="outline"><MdTranslate className='text-xl'/><Link href="/demo">Demo</Link></Button>
                 <Button className='cursor-pointer flex items-center bg-gradient-lexify hover:bg-gradient-lexify-hover transition-all'><PiMagicWandLight className='text-xl'/><span className='hidden sm:block'>Lexify</span> PRO</Button>
                 <ModeToggle/>
                 {
