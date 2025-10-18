@@ -30,8 +30,9 @@ import { RiGitRepositoryPrivateLine } from "react-icons/ri";
 
 import Login from './auth/Login'
 import Register from './auth/Register'
-import { useSession } from 'next-auth/react';
 
+import { useSession } from 'next-auth/react';
+import {signOut} from "next-auth/react"
 
 
 const Navbar = () => {
@@ -55,7 +56,7 @@ const Navbar = () => {
                 {
                     session.data?.user?.email ?
                         <Tooltip>
-                            <TooltipTrigger asChild><Button onClick={()=>console.log("cerrando sesion...")} className='cursor-pointer' variant="outline"><IoIosLogOut className=''/></Button></TooltipTrigger>
+                            <TooltipTrigger asChild><Button onClick={()=>signOut()} className='cursor-pointer' variant="outline"><IoIosLogOut className=''/></Button></TooltipTrigger>
                             <TooltipContent>
                                 Cerrar sesión
                             </TooltipContent>
