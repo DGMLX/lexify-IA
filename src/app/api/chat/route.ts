@@ -4,7 +4,7 @@ import { ChatOpenAI } from "@langchain/openai";
 export async function POST(req:Request){
     try {   
         const {message} = await req.json()
-
+        console.log(message)
         const model = new ChatOpenAI({
             model: "gpt-4",
             temperature:0.3
