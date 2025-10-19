@@ -53,7 +53,7 @@ import SelectLanguages from '../chatTraductor/SelectLanguages';
 
 const SidebarComponent = () => {
 
-  const conversaciones = true;
+  const conversaciones = false;
   const [ isOpen,setIsOpen] = useState(false);
   const [ isOpen2,setIsOpen2] = useState(false);
 

@@ -62,26 +62,26 @@ const TraductorPage = () => {
 
   const [input, setInput] = useState('');
   const [model, setModel] = useState<string>(models[0].value);
-  const [webSearch, setWebSearch] = useState(false);
 
 
-  const handleSubmit = (message: PromptInputMessage) => {
-    const hasText = Boolean(message.text);
-    const hasAttachments = Boolean(message.files?.length);
+  const handleSubmit = (message: string) => {
+    // const hasText = Boolean(message.text);
+    // const hasAttachments = Boolean(message.files?.length);
 
-    if (!(hasText || hasAttachments)) {
-      return;
+    // if (!(hasText || hasAttachments)) {
+    //   return;
     
-      console.log("enviado")
-    }
+      console.log(`${message} enviado...`)
+    
   }
 
   return (
     <>
-       <div className="max-w-4xl mx-auto p-6 relative size-full h-screen">
+    
+       <div className="max-w-4xl mx-auto pr-6 pl-6 pt-6 pb-1 relative size-full  h-[calc(100vh-100px)] ">
       <div className="flex flex-col h-full">
         <Conversation className="h-full">
-          <ConversationContent>
+          <ConversationContent className=''>
         
             <EmptyConversations/>
        
@@ -89,7 +89,7 @@ const TraductorPage = () => {
           <ConversationScrollButton />
         </Conversation>
 
-        <PromptInput onSubmit={()=>{}} className="mt-4" globalDrop multiple>
+        <PromptInput  onSubmit={()=>{handleSubmit(input)}}  className="mt-4 cursor-pointer "  globalDrop multiple>
           <PromptInputBody>
           
             <PromptInputTextarea
@@ -100,10 +100,8 @@ const TraductorPage = () => {
           </PromptInputBody>
           <PromptInputToolbar>
             <PromptInputTools>
-            
-             
             </PromptInputTools>
-            <PromptInputSubmit />
+            <PromptInputSubmit className='cursor-pointer  transition'/>
           </PromptInputToolbar>
         </PromptInput>
       </div>
