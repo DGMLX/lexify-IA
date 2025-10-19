@@ -21,6 +21,10 @@ import {
 import { Shimmer } from '@/components/ai-elements/shimmer';
 import { Loader } from '@/components/ai-elements/loader';
 import EmptyConversations from '@/components/chatTraductor/EmptyConversations';
+import { EmptyContent } from '@/components/ui/empty';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 const models = [{ name: 'GPT 4o', value: 'openai/gpt-4o' }];
 
@@ -32,6 +36,8 @@ const messages:{ key: number; value: string; name: string; avatar: string,from:"
   { key: 5, value: "I'm interested in natural language processing tools.", name: 'Diego Altamirano', avatar: 'https://github.com/haydenbleasel.png', from: 'user' },
   { key: 6, value: 'Great choice! We have several NLP APIs. Would you like a demo?', name: 'AI Assistant', avatar: '/logo.png', from: 'assistant' }
 ];
+
+const cargandoSugerencias = false
 
 const TraductorPage = () => {
   const [input, setInput] = useState('');
@@ -86,11 +92,57 @@ const TraductorPage = () => {
       </div>
 
       {/* Columna derecha: Loader + Shimmer */}
-      <div className="flex flex-col lg:flex-row justify-center items-center gap-3 p-4 lg:w-[400px] w-full border-t lg:border-t-0 lg:border-l border-border/30 bg-muted/10">
-        <Loader className="mr-0 lg:mr-3" />
-        <Shimmer className="text-center text-sm lg:text-base">
-          Cargando sugerencias y correcciones...
-        </Shimmer>
+      <div className="flex flex-col lg:flex-row  gap-3 p-4 lg:w-[400px] w-full border-t lg:border-t-0 lg:border-l border-border/30 bg-muted/10">
+         <div className='w-full'>
+          {
+            cargandoSugerencias ? (
+              <div className='mt-5'>
+                <Loader className="mr-0 lg:mr-3" />
+                <Shimmer className="text-center text-sm lg:text-base">
+                  Cargando sugerencias y correcciones...
+                </Shimmer>
+              </div>
+            ) :
+            <>
+            <h2 className='text-lg'>Sugerencias y correcciones.</h2>
+            <hr className='mt-2'/>
+            <ScrollArea className='h-[300px] md:h-[550px]'>
+
+              <Card className='w-full mt-3'>
+                <CardHeader>
+                  <CardTitle>Lorem, ipsum dolor.</CardTitle>
+                  <CardDescription>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus, mollitia culpa impedit aperiam veniam aut. Labore adipisci ipsum maxime esse!</CardDescription>
+                </CardHeader>
+              </Card>
+
+              <Card className='w-full mt-3'>
+                <CardHeader>
+                  <CardTitle>Lorem, ipsum dolor.</CardTitle>
+                  <CardDescription>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus, mollitia culpa impedit aperiam veniam aut. Labore adipisci ipsum maxime esse!</CardDescription>
+                </CardHeader>
+              </Card>
+
+              <Card className='w-full mt-3'>
+                <CardHeader>
+                  <CardTitle>Lorem, ipsum dolor.</CardTitle>
+                  <CardDescription>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus, mollitia culpa impedit aperiam veniam aut. Labore adipisci ipsum maxime esse!</CardDescription>
+                </CardHeader>
+              </Card>
+
+              <Card className='w-full mt-3'>
+                <CardHeader>
+                  <CardTitle>Lorem, ipsum dolor.</CardTitle>
+                  <CardDescription>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus, mollitia culpa impedit aperiam veniam aut. Labore adipisci ipsum maxime esse!</CardDescription>
+                </CardHeader>
+              </Card>
+            </ScrollArea>
+            
+            </>
+          }
+      
+        
+      
+         </div>
       </div>
     </div>
   );
