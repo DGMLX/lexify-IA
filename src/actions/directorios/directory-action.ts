@@ -1,15 +1,42 @@
+'use server'
+
+import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+import { prisma } from "@/lib/db"
 import { capitalize } from "@/utils/capitalizar"
+import { getServerSession } from "next-auth"
 
 
 export const crearDirectorio = async(idiomaPrincipal:string,idiomaTraduccion:string,titulo:string) =>{
+    const session = await getServerSession(authOptions)
+    console.log(session)
     try {
+        let nombreDirectorio = ""
         if(titulo !== ""){
-            console.log(`creando directorio llamado ${titulo} traduciendo de ${idiomaPrincipal} a ${idiomaTraduccion}`)
+            nombreDirectorio = titulo
         }else{
-            console.log(`creando directorio llamado ${capitalize(idiomaPrincipal)} - ${capitalize(idiomaTraduccion)} traduciendo de ${idiomaPrincipal} a ${idiomaTraduccion}`)
+            nombreDirectorio =`${capitalize(idiomaPrincipal)} - ${capitalize(idiomaTraduccion)}`
+        }
+
+        if(!session?.user.id) return {ok:false,message:"Error en la autentificación al generar nuevo directorio."}
+
+        const directoryDB = await prisma.directory.create({
+            data:{
+                nombre:nombreDirectorio,
+                lenguaje_principal:capitalize(idiomaPrincipal),
+                lenguaje_traducir:capitalize(idiomaTraduccion),
+                userId:session?.user.id
+            }
+        })
+        return {
+            ok:true,
+            message:"Directorio creado correctamente."
         }
     } catch (error) {
         console.log("error ",error)
+        return {
+            ok:false,
+            message:"Error interno al generar el directorio."
+        }
     }
 }
 
