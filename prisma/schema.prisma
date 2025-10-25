@@ -20,6 +20,18 @@ model User{
   email String @unique
   password String
   created_at DateTime @default(now())
+
+  directorios Directory[]
 }
 
+model Directory{
+  id String @id @default(uuid())
+  lenguaje_principal String
+  lenguaje_traducir String
+  nombre String
+  created_at DateTime @default(now())
+
+  userId String
+  user User @relation(fields: [userId],references: [id])
+}
 

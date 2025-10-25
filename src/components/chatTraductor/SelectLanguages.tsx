@@ -1,8 +1,16 @@
 import React from 'react'
-import { SelectContent, SelectItem } from '../ui/select'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
 
-const SelectLanguages = () => {
+type Props = {
+  setIdioma: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const SelectLanguages = ({ setIdioma }: Props) => {
   return (
+    <Select onValueChange={(value) => setIdioma(value)}>
+        <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Idioma" />
+        </SelectTrigger>
     <SelectContent>
             <SelectItem value="afrikaans">Afrikaans</SelectItem>
             <SelectItem value="albanes">Albanés</SelectItem>
@@ -92,6 +100,7 @@ const SelectLanguages = () => {
             <SelectItem value="yoruba">Yoruba</SelectItem>
             <SelectItem value="zulú">Zulú</SelectItem>
     </SelectContent>
+    </Select>
   )
 }
 
