@@ -1,6 +1,7 @@
 'use server'
 
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+
+import { authOptions } from "@/auth-config"
 import { prisma } from "@/lib/db"
 import { capitalize } from "@/utils/capitalizar"
 import { getServerSession } from "next-auth"
