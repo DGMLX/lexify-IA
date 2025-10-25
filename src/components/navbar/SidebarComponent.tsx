@@ -83,7 +83,7 @@ const SidebarComponent = () => {
         <SidebarGroup>
           {
             !session.data ? (
-                  <SidebarGroupLabel><Badge variant="secondary">Usuario no registrado</Badge></SidebarGroupLabel>
+                  <SidebarGroupLabel><Badge variant="secondary">Usuario no autenticado</Badge></SidebarGroupLabel>
             ) : (
               <>
                 <SidebarGroupLabel><Badge variant="secondary">Plan gratuito</Badge></SidebarGroupLabel>
