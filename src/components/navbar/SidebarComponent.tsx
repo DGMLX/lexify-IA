@@ -47,11 +47,17 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 import { Select, SelectTrigger, SelectValue } from '../ui/select';
 import { IoArrowForwardCircleOutline } from 'react-icons/io5';
 import SelectLanguages from '../chatTraductor/SelectLanguages';
+import { useSession } from 'next-auth/react';
+import NoRegisterDirectory from './NoRegisterDirectory';
+import CrearDirectorio from '../directorio/CrearDirectorio';
 
 
 
 
 const SidebarComponent = () => {
+
+  const session = useSession()
+  console.log(session)
 
   const conversaciones = true;
   const [ isOpen,setIsOpen] = useState(false);
@@ -75,12 +81,24 @@ const SidebarComponent = () => {
       <SidebarContent>
 
         <SidebarGroup>
-          <SidebarGroupLabel><Badge variant="secondary">Plan básico</Badge></SidebarGroupLabel>
-          
-          
+          {
+            !session.data ? (
+                  <SidebarGroupLabel><Badge variant="secondary">Usuario no registrado</Badge></SidebarGroupLabel>
+            ) : (
+              <>
+                <SidebarGroupLabel><Badge variant="secondary">Plan gratuito</Badge></SidebarGroupLabel>
+              </>
+            )
+            
+          }
           <SidebarGroupContent>
             <SidebarMenu>
               {
+                !session.data ? (
+                  <NoRegisterDirectory/>
+                ) :
+
+
                 !conversaciones ? (
                   <SidebarMenuItem>
                     <EmptyConversations/>
@@ -88,46 +106,7 @@ const SidebarComponent = () => {
                 ) :
                 (
                   <>
-                  <Dialog >
-          <DialogTrigger className="cursor-pointer my-4" asChild><Button className="cursor-pointer"><IoAddSharp className='text-xl'/>Crear directorio de traducción</Button></DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-                <DialogTitle>Crea tu entorno de traducción</DialogTitle>
-                <DialogDescription>
-                    Crea tu carpeta en donde se guardarán las traducciones según el idioma escogido.
-                </DialogDescription>
-            </DialogHeader>
-            <div className="flex justify-around items-center">
-                <div>
-                    <p className=" mb-2">Idioma principal</p>
-                    <Select>
-                        <SelectTrigger className="w-[180px]">
-                            <SelectValue placeholder="Idioma" />
-                        </SelectTrigger>
-                        <SelectLanguages/>
-
-                    </Select>
-                </div>
-                <IoArrowForwardCircleOutline className="text-2xl"/>
-                <div>
-                    <p className=" mb-2">Idioma a traducir</p>
-                    <Select>
-                        <SelectTrigger className="w-[180px]">
-                            <SelectValue placeholder="Idioma" />
-                        </SelectTrigger>
-                        <SelectLanguages/>
-
-                    </Select>
-                </div>
-            </div>
-            <DialogFooter className="mt-2">
-                <DialogClose asChild>
-                    <Button variant="secondary">Cancelar</Button>
-                </DialogClose>
-                <Button>Crear</Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
+                  <CrearDirectorio/>
                   <Collapsible
                     open={isOpen}
                     onOpenChange={setIsOpen}
